@@ -1,0 +1,973 @@
+swagger: '2.0'
+info:
+  title: Restful service
+  version: 1.0.0
+host: ((host))
+basePath: /
+schemes:
+  - https
+
+paths:
+  #devices
+  /devices/:
+    get:
+      tags:
+        - Devices
+      summary: Device List
+      operationId: Device List
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          default: 1
+        - name: per-page
+          in: query
+          description: per-page
+          required: true
+          type: integer 
+          maxLength: 50
+          default: 10
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/device'
+  /devices/create:           
+    post:
+      tags:
+        - Devices
+      summary: Device Create
+      operationId: Device Create
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: device_id
+          in: formData
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: type_id
+          in: formData
+          type: string
+          description: Modem for connecting to external meters or independent device
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string      
+  /devices/view/{id}:           
+    get:
+      tags:
+        - Devices
+      summary: Device view
+      operationId: Device view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string               
+     
+  /devices/update/{id}:           
+    post:
+      tags:
+        - Devices
+      summary: Device view
+      operationId: Device view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255  
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string              
+    put:
+      tags:
+        - Devices
+      summary: Device view
+      operationId: Device view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255  
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string                
+              
+    patch:
+      tags:
+        - Devices
+      summary: Device view
+      operationId: Device view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255  
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string             
+  
+     
+  /devices/delete/{id}:           
+    delete:
+      tags:
+        - Devices
+      summary: Device view
+      operationId: Device view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string   
+     
+  #channels
+  /channels/:
+    get:
+      tags:
+        - Channels
+      summary: Channel List
+      operationId: Channel List
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          default: 1
+        - name: per-page
+          in: query
+          description: per-page
+          required: true
+          type: integer 
+          maxLength: 50
+          default: 10
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/channel'             
+  /channels/create:           
+    post:
+      tags:
+        - Channels
+      summary: Channel Create
+      operationId: Channel Create
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: device_id
+          in: formData
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: measure_unit
+          in: formData
+          type: string
+          enum: [ "cold", "hot", "gas", "heat", "power", "current", "voltage", "cos_fi"]
+          description: Measure unit (cold. hot, gas, heat, power, current, voltage, cos_fi)
+          required: true
+        - name: measure_item
+          in: formData
+          type: string
+          enum: [ "m3", "Gcal", "kWh", "A", "V", "blank-string"]
+          description: Measure item (m3, Gcal, kWh, A, V, '')
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  type_id:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string             
+   
+              
+  /channels/view/{id}:           
+    get:
+      tags:
+        - Channels
+      summary: Channel view
+      operationId: Channel view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  measure_unit:
+                    type: string
+                  measure_item:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string               
+     
+  /channels/update/{id}:           
+    post:
+      tags:
+        - Channels
+      summary: Channel update
+      operationId: Channel update
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: measure_unit
+          in: formData
+          type: string
+          enum: [ "cold", "hot", "gas", "heat", "power", "current", "voltage", "cos_fi"]
+        - name: measure_item
+          in: formData
+          type: string
+          enum: [ "m3", "Gcal", "kWh", "A", "V", "blank-string"]
+        - name: imei
+          in: formData
+          type: string
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255  
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  measure_unit:
+                    type: string
+                  measure_item:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string              
+    put:
+      tags:
+        - Channels
+      summary: Channel update
+      operationId: Channel update
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255  
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  measure_unit:
+                    type: string
+                  measure_item:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string                 
+              
+    patch:
+      tags:
+        - Channels
+      summary: Channel update
+      operationId: Channel update
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: imei
+          in: formData
+          type: integer
+          maxLength: 16
+        - name: install_location
+          in: formData
+          type: string
+          maxLength: 255  
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  measure_unit:
+                    type: string
+                  measure_item:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string              
+  
+     
+  /channels/delete/{id}:           
+    delete:
+      tags:
+        - Channels
+      summary: Channel delete
+      operationId: Channel delete
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  device_id:
+                    type: string
+                  measure_unit:
+                    type: string
+                  measure_item:
+                    type: string
+                  imei:
+                    type: integer
+                  install_location:
+                    type: string            
+   
+  /channels/device/{id}:           
+    get:
+      tags:
+        - Channels
+      summary: View device channels with values
+      operationId: Device view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  channel_id:
+                    type: integer
+                  device_id:
+                    type: string
+                  measure_unit:
+                    type: string
+                  measure_item:
+                    type: string
+                  value:
+                    type: number
+                  added:
+                    type: sinteger              
+              
+              
+              
+  #measures
+  /measures/:
+    get:
+      tags:
+        - Measures
+      summary: Measures List
+      operationId: Measures List
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          default: 1
+        - name: per-page
+          in: query
+          description: per-page
+          required: true
+          type: integer 
+          maxLength: 50
+          default: 10
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/measure'            
+              
+              
+  /measures/create:           
+    post:
+      tags:
+        - Measures
+      summary: Measure Create
+      operationId: Measure Create
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: channel_id
+          in: formData
+          type: integer
+          description: channel id
+          required: true
+        - name: value
+          in: formData
+          type: number
+          description: value
+          required: true
+        - name: added
+          in: formData
+          type: integer
+          description: value
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer
+
+  /measures/view/{id}:           
+    get:
+      tags:
+        - Measures
+      summary: Measure view
+      operationId: Measure view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer            
+     
+  /measures/update/{id}:           
+    post:
+      tags:
+        - Measures
+      summary: Measure update
+      operationId: Measure update
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: value
+          in: formData
+          type: number
+        - name: added
+          in: formData
+          type: integer
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer              
+    put:
+      tags:
+        - Measures
+      summary: Measure update
+      operationId: Measure update
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: value
+          in: formData
+          type: number
+        - name: added
+          in: formData
+          type: integer
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer                
+              
+    patch:
+      tags:
+        - Measures
+      summary: Measure update
+      operationId: Measure update
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+        - name: value
+          in: formData
+          type: number
+        - name: added
+          in: formData
+          type: integer
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer              
+  
+     
+  /measures/delete/{id}:           
+    delete:
+      tags:
+        - Measures
+      summary: Measure delete
+      operationId: Measure delete
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: device ID (unique)
+          required: true
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer            
+    
+                        
+  /measures/channel/{id}:           
+    get:
+      tags:
+        - Measures
+      summary: Measure view values by channel
+      operationId: Measure view
+      consumes:
+        - application/x-www-formData-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true 
+        - name: limit
+          in: formData
+          type: integer
+          description: limit
+          required: true
+          default: 100
+        - name: added_from
+          in: formData
+          type: integer
+          description: added_from
+        - name: added_to
+          in: formData
+          type: integer
+          description: added_to
+
+      responses:
+        '200':
+          description: Успешно.
+          schema:
+            type: object
+            properties:
+                  id:
+                    type: integer
+                  channel_id:
+                    type: integer
+                  value:
+                    type: number
+                  added:
+                    type: integer                     
+                        
+                        
+                        
+              
+definitions:
+
+  device-data:
+    type: object
+    properties:
+      devices:
+        type: array
+        items:
+          $ref: "#/definitions/device"
+
+  device:
+    type: object
+    required:
+      - type
+    properties:
+      device_id:
+        type: string
+        description: device ID (unique)
+      type_id:
+        type: string
+        description: Modem for connecting to external meters or independent device
+      imei:
+        type: integer
+        maxLength: 16
+      install_location:
+        type: string
+        maxLength: 255
+  
+  channel-data:
+    type: object
+    properties:
+      devices:
+        type: array
+        items:
+          $ref: "#/definitions/channel"  
+    
+    
+  channel:
+    type: object
+    required:
+      - type
+    properties:
+      id:
+        type: integer
+        description: Id 
+      device_id:
+        type: integer
+        description: device ID
+      measure_unit:
+        type: string
+        description: Measure unit (cold. hot, gas, heat, power, current, voltage, cos_fi)
+      measure_item:
+        type: string
+        description: Measure unit (m3, Gcal, kWh, A, V, '')
+      imei:
+        type: integer
+        maxLength: 16
+      install_location:
+        type: string
+        maxLength: 255
+        
+  measure:
+    type: object
+    required:
+      - type
+    properties:
+      channel_id:
+        type: integer
+        description: channel_Id 
+      value:
+        type: number
+        formate: float
+        description: value
+      added:
+        type: integer
+        description: date  
+        
+        
