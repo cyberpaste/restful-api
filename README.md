@@ -11,7 +11,7 @@
 
 ## Install
 
-0) clone repo ```git clone https://github.com/cyberpaste/restful-api``` + Docker-compose + yii2 standart install
+0) clone repo ```git clone https://github.com/cyberpaste/restful-api``` + Docker-compose + yii2 advanced install
 1) run command ``` composer update  ```
 2) run command ``` yii migrate ```
 5) try service (main page swagger documentation with all methods)
