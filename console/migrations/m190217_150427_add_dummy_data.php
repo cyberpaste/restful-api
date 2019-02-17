@@ -37,7 +37,7 @@ class m190217_150427_add_dummy_data extends Migration {
 
     public function safeDown() {
         $this->delete('{{%devices}}');
-        $this->delete('{{%measures}}');
+        $this->delete('{{%channels}}');
     }
 
 }
